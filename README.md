@@ -49,11 +49,11 @@ services:
     volumes:
       - /:/data
     environment:
-      - RESTIC_BACKUP_OPTIONS="--exclude=/data/dir/*"
-      - RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo"
-      - AWS_ACCESS_KEY_ID="keyid"
-      - AWS_SECRET_ACCESS_KEY="topsecret"
-      - RESTIC_PASSWORD="some_good_hash"
+      - RESTIC_BACKUP_OPTIONS=--exclude=/data/dir/*
+      - RESTIC_REPOSITORY=s3:https://s3.amazonaws.com/some-repo
+      - AWS_ACCESS_KEY_ID=keyid
+      - AWS_SECRET_ACCESS_KEY=topsecret"
+      - RESTIC_PASSWORD=some_good_hash
 ```
 
 ----
@@ -79,12 +79,12 @@ services:
     volumes:
       - /:/data
     environment:
-      - CRON_BACKUP_EXPRESSION="15   3  *   *   *"
-      - RESTIC_BACKUP_OPTIONS="--exclude=/data/dir/*"
-      - RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo"
-      - AWS_ACCESS_KEY_ID="keyid"
-      - AWS_SECRET_ACCESS_KEY="topsecret"
-      - RESTIC_PASSWORD="some_good_hash"
+      - CRON_BACKUP_EXPRESSION=15   3  *   *   *
+      - RESTIC_BACKUP_OPTIONS=--exclude=/data/dir/*
+      - RESTIC_REPOSITORY=s3:https://s3.amazonaws.com/some-repo
+      - AWS_ACCESS_KEY_ID=keyid
+      - AWS_SECRET_ACCESS_KEY=topsecret
+      - RESTIC_PASSWORD=some_good_hash
 ```
 
 
@@ -105,16 +105,16 @@ services:
     volumes:
       - /:/data
     environment:
-      - CRON_CLEANUP_EXPRESSION="0   0  *   *   *"
+      - CRON_CLEANUP_EXPRESSION=0   0  *   *   *
       - RESTIC_CLEANUP_KEEP_WEEKLY=5
       - RESTIC_CLEANUP_KEEP_MONTHLY=12
       - RESTIC_CLEANUP_KEEP_YEARLY=75
-      - RESTIC_CLEANUP_OPTIONS="--prune"
-      - RESTIC_BACKUP_OPTIONS="--exclude=/data/dir/*"
-      - RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo"
-      - AWS_ACCESS_KEY_ID="keyid"
-      - AWS_SECRET_ACCESS_KEY="topsecret"
-      - RESTIC_PASSWORD="some_good_hash"
+      - RESTIC_CLEANUP_OPTIONS=--prune
+      - RESTIC_BACKUP_OPTIONS=--exclude=/data/dir/*
+      - RESTIC_REPOSITORY=s3:https://s3.amazonaws.com/some-repo
+      - AWS_ACCESS_KEY_ID=keyid
+      - AWS_SECRET_ACCESS_KEY=topsecret
+      - RESTIC_PASSWORD=some_good_hash
 ```
 
 #### Start the container
@@ -135,8 +135,9 @@ A full explanation of the commands and options you can refer to the [manual](htt
 docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
                 -e AWS_ACCESS_KEY_ID="keyid" \
                 -e AWS_SECRET_ACCESS_KEY="topsecret" \
-                -e RESTIC_PASSWORD="some_good_hash" oursource/restic \
-                -v /:/data
+                -e RESTIC_PASSWORD="some_good_hash" \
+                -v /:/data \
+                oursource/restic \
                 restic init
 ```
 
@@ -147,8 +148,9 @@ docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
 docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
                 -e AWS_ACCESS_KEY_ID="keyid" \
                 -e AWS_SECRET_ACCESS_KEY="topsecret" \
-                -e RESTIC_PASSWORD="some_good_hash" oursource/restic \
-                -v /:/data
+                -e RESTIC_PASSWORD="some_good_hash" \
+                -v /:/data \
+                oursource/restic \
                 restic snapshots
 ```
 
@@ -160,8 +162,9 @@ docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
 docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
                 -e AWS_ACCESS_KEY_ID="keyid" \
                 -e AWS_SECRET_ACCESS_KEY="topsecret" \
-                -e RESTIC_PASSWORD="some_good_hash" oursource/restic \
-                -v /:/data
+                -e RESTIC_PASSWORD="some_good_hash" \
+                -v /:/data \
+                oursource/restic \
                 restic restore _id_ --target /data/restore_location
 ```
 
