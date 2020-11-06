@@ -150,7 +150,6 @@ docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
                 -e AWS_ACCESS_KEY_ID="keyid" \
                 -e AWS_SECRET_ACCESS_KEY="topsecret" \
                 -e RESTIC_PASSWORD="some_good_hash" \
-                -v /:/data \
                 oursource/restic \
                 restic snapshots
 ```
