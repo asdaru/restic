@@ -1,6 +1,5 @@
 # docker-restic
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/oursource/restic.svg)](https://hub.docker.com/r/oursource/restic/) [![Docker layers](https://images.microbadger.com/badges/image/oursource/restic.svg)](https://microbadger.com/images/oursource/restic) [![Github Stars](https://img.shields.io/github/stars/our-source/restic.svg?label=github%20%E2%98%85)](https://github.com/our-source/restic/) [![Github Stars](https://img.shields.io/github/contributors/our-source/restic.svg)](https://github.com/our-source/restic/) [![Github Forks](https://img.shields.io/github/forks/our-source/restic.svg?label=github%20forks)](https://github.com/our-source/restic/)
 
 Restic is a fantastic backup tool. To wrap this in a usefull and flexible docker container there is this repo.
 
@@ -33,17 +32,15 @@ docker run --rm -e RESTIC_REPOSITORY="s3:https://s3.amazonaws.com/some-repo" \
 
 #### Create a `docker-compose.yml`
 
-Adapt this file with your FQDN. Install [docker-compose](https://docs.docker.com/compose/) in the version `1.6` or higher.
-
 `restart: always` ensures that the restic server container is automatically restarted by Docker in cases like a Docker service or host restart or container exit.
 
-```yaml
-version: '2'
+`hostname` - very important, you shold set it!!!
 
+```yaml
 services:
   restic:
     restart: always
-    image: oursource/restic:latest
+    image: asdaru/restic:latest
     hostname: backup
     domainname: domain.com
     container_name: restic
@@ -68,7 +65,6 @@ __to change the backup times__:
 For example you want to run the backup every day at 03:15.
 
 ```yaml
-version: '2'
 
 services:
   restic:
@@ -94,7 +90,6 @@ __to change the clean times and periods__:
 For example you want to run the backup every day at 00:00
 
 ```yaml
-version: '2'
 
 services:
   restic:
